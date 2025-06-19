@@ -1,10 +1,16 @@
 # Salesforce Insurance MCP Server
 
-An MCP (Model Context Protocol) server implementation that integrates Claude with Salesforce, enabling natural language interactions with your Salesforce data and metadata. This server allows Claude to query, modify, and manage your Salesforce objects and records using everyday language.
+A specialized MCP (Model Context Protocol) server implementation designed for insurance companies and professionals working with Salesforce. This server integrates with both **Claude Desktop** and **Cursor** through Salesforce's Product Catalog Management (PCM) system, enabling natural language interactions for designing and managing comprehensive insurance policies, alongside standard Salesforce data operations.
+
+Built specifically for the insurance industry, this server allows users to create, modify, and manage complex insurance policies with coverage options, pricing models, eligibility criteria, and policy terms using everyday language. It leverages Salesforce's enterprise-grade Product Catalog Management Business APIs to provide robust insurance policy design capabilities while maintaining full access to standard Salesforce object and data management functionality.
+
+**Compatible with both Claude Desktop and Cursor**, this MCP server brings enterprise-grade insurance policy management capabilities to your preferred AI-powered development environment.
 
 
 ## Features
 
+* **Cross-Platform Compatibility**: Works seamlessly with both Claude Desktop and Cursor
+* **Insurance Policy Design**: Create and manage comprehensive insurance policies using Salesforce Product Catalog Management (PCM)
 * **Object and Field Management**: Create and modify custom objects and fields using natural language
 * **Smart Object Search**: Find Salesforce objects using partial name matches
 * **Detailed Schema Information**: Get comprehensive field and relationship details for any object
@@ -17,7 +23,7 @@ An MCP (Model Context Protocol) server implementation that integrates Claude wit
 ## Installation
 
 ```bash
-npm install -g @tsmztech/mcp-server-salesforce
+npm install -g https://github.com/bruteforce17/mcp-server-salesforce-insurance
 ```
 
 ## Tools
@@ -135,6 +141,19 @@ Manage debug logs for Salesforce users:
 * Configure log levels (NONE, ERROR, WARN, INFO, DEBUG, FINE, FINER, FINEST)
 * Example: "Enable debug logs for user@example.com" or "Retrieve recent logs for an admin user"
 
+### insurance_policy_design
+Design and manage comprehensive insurance policies using Salesforce Product Catalog Management (PCM):
+* **Policy Creation**: Create new insurance policies with complete coverage options and pricing models
+* **Policy Management**: List, clone, and modify existing insurance policies
+* **Coverage Configuration**: Define coverage types, limits, deductibles, and optional coverage
+* **Pricing Models**: Set up complex pricing with base premiums, factors, and discount structures
+* **Eligibility Criteria**: Configure age, credit score, geographic, and industry restrictions
+* **Policy Terms**: Define term lengths, renewal types, payment frequencies, and cancellation policies
+* **Custom Fields**: Add custom fields with various types (text, number, date, picklist, etc.)
+* **Product Catalog Integration**: Leverages Salesforce PCM Business APIs for enterprise-grade policy management
+* **Policy Types**: Supports AUTO, HOME, LIFE, HEALTH, COMMERCIAL, and UMBRELLA insurance policies
+* Example: "Create a comprehensive auto insurance policy with multiple coverage options and tiered pricing"
+
 ## Setup
 
 ### Salesforce Authentication
@@ -151,7 +170,11 @@ You can connect to Salesforce using one of two authentication methods:
 4. Save the Client ID and Client Secret
 5. **Important**: Note your instance URL (e.g., `https://your-domain.my.salesforce.com`) as it's required for authentication
 
-### Usage with Claude Desktop
+### Usage with Claude Desktop and Cursor
+
+This MCP server can be integrated with both **Claude Desktop** and **Cursor** for enhanced insurance policy management capabilities.
+
+#### Claude Desktop Configuration
 
 Add to your `claude_desktop_config.json`:
 
@@ -161,7 +184,7 @@ Add to your `claude_desktop_config.json`:
   "mcpServers": {
     "salesforce": {
       "command": "npx",
-      "args": ["-y", "@tsmztech/mcp-server-salesforce"],
+      "args": ["-y", "https://github.com/bruteforce17/mcp-server-salesforce-insurance"],
       "env": {
         "SALESFORCE_CONNECTION_TYPE": "User_Password",
         "SALESFORCE_USERNAME": "your_username",
@@ -180,7 +203,7 @@ Add to your `claude_desktop_config.json`:
   "mcpServers": {
     "salesforce": {
       "command": "npx",
-      "args": ["-y", "@tsmztech/mcp-server-salesforce"],
+      "args": ["-y", "https://github.com/bruteforce17/mcp-server-salesforce-insurance"],
       "env": {
         "SALESFORCE_CONNECTION_TYPE": "OAuth_2.0_Client_Credentials",
         "SALESFORCE_CLIENT_ID": "your_client_id",
@@ -193,6 +216,51 @@ Add to your `claude_desktop_config.json`:
 ```
 
 > **Note**: For OAuth 2.0 Client Credentials Flow, the `SALESFORCE_INSTANCE_URL` must be your exact Salesforce instance URL (e.g., `https://your-domain.my.salesforce.com`). The token endpoint will be constructed as `<instance_url>/services/oauth2/token`.
+
+#### Cursor Configuration
+
+For **Cursor**, add the MCP server configuration to your Cursor settings:
+
+##### Username/Password Authentication:
+```json
+{
+  "mcp": {
+    "servers": {
+      "salesforce-insurance": {
+        "command": "npx",
+        "args": ["-y", "https://github.com/bruteforce17/mcp-server-salesforce-insurance"],
+        "env": {
+          "SALESFORCE_CONNECTION_TYPE": "User_Password",
+          "SALESFORCE_USERNAME": "your_username",
+          "SALESFORCE_PASSWORD": "your_password",
+          "SALESFORCE_TOKEN": "your_security_token",
+          "SALESFORCE_INSTANCE_URL": "org_url"
+        }
+      }
+    }
+  }
+}
+```
+
+##### OAuth 2.0 Client Credentials Flow:
+```json
+{
+  "mcp": {
+    "servers": {
+      "salesforce-insurance": {
+        "command": "npx",
+        "args": ["-y", "https://github.com/bruteforce17/mcp-server-salesforce-insurance"],
+        "env": {
+          "SALESFORCE_CONNECTION_TYPE": "OAuth_2.0_Client_Credentials",
+          "SALESFORCE_CLIENT_ID": "your_client_id",
+          "SALESFORCE_CLIENT_SECRET": "your_client_secret",
+          "SALESFORCE_INSTANCE_URL": "https://your-domain.my.salesforce.com"
+        }
+      }
+    }
+  }
+}
+```
 
 ## Example Usage
 
@@ -287,15 +355,27 @@ Examples with Field Level Security:
 "Configure log level to DEBUG for a user"
 ```
 
+### Insurance Policy Design and Management
+```
+"Create a comprehensive auto insurance policy with liability, comprehensive, and collision coverage"
+"Design a home insurance policy with multiple coverage options and tiered pricing"
+"List all existing insurance policies and their details"
+"Clone the Standard Auto Policy and modify it for high-risk drivers"
+"Create a life insurance policy with age-based pricing factors"
+"Design a commercial insurance policy with industry-specific restrictions"
+"Add custom fields to track policy-specific information"
+"Set up discount structures for multi-policy customers"
+```
+
 ## Development
 
 ### Building from source
 ```bash
 # Clone the repository
-git clone https://github.com/tsmztech/mcp-server-salesforce.git
+git clone https://github.com/bruteforce17/mcp-server-salesforce-insurance.git
 
 # Navigate to directory
-cd mcp-server-salesforce
+cd mcp-server-salesforce-insurance
 
 # Install dependencies
 npm install
@@ -309,3 +389,6 @@ Contributions are welcome! Feel free to submit a Pull Request.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Issues and Support
+If you encounter any issues or need support, please file an issue on the [GitHub repository](https://github.com/bruteforce17/mcp-server-salesforce-insurance/issues).
