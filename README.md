@@ -219,7 +219,12 @@ Add to your `claude_desktop_config.json`:
 
 #### Cursor Configuration
 
-For **Cursor**, add the MCP server configuration to your Cursor settings:
+For **Cursor**, create an `mcp.json` file under the `/.cursor` folder in your repository and add the MCP server configuration:
+
+**File Location**: `your-project/.cursor/mcp.json`
+
+![Cursor MCP Tools Configuration](assets/cursor-mcp-tools.png)
+*Screenshot showing the Salesforce MCP server enabled in Cursor's Tools & Integrations settings*
 
 ##### Username/Password Authentication:
 ```json
