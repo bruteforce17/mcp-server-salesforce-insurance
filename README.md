@@ -1,10 +1,7 @@
-# Salesforce MCP Server
+# Salesforce Insurance MCP Server
 
 An MCP (Model Context Protocol) server implementation that integrates Claude with Salesforce, enabling natural language interactions with your Salesforce data and metadata. This server allows Claude to query, modify, and manage your Salesforce objects and records using everyday language.
 
-<a href="https://glama.ai/mcp/servers/kqeniawbr6">
-  <img width="380" height="200" src="https://glama.ai/mcp/servers/kqeniawbr6/badge" alt="Salesforce Server MCP server" />
-</a>
 
 ## Features
 
@@ -312,6 +309,3 @@ Contributions are welcome! Feel free to submit a Pull Request.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Issues and Support
-If you encounter any issues or need support, please file an issue on the [GitHub repository](https://github.com/tsmztech/mcp-server-salesforce/issues).
