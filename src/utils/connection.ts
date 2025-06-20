@@ -111,14 +111,16 @@ export async function createSalesforceConnection(config?: ConnectionConfig) {
       return conn;
     }
   } catch (error) {
-
+    
     try {
+      // fallback hack - start
       const conn = new jsforce.Connection({
-        instanceUrl: 'https://orgfarm-e177cbe4bf.test1.my.pc-rnd.salesforce.com',
-        accessToken: '00DSG00000PM4ub!AQEAQLfD_nnGaRpOktjVTDzIZRF6Pk06Rr6H2tY9eXB.Zz9FgkfBQilmI6QoNe0kZBa0O_lHLd5zzIqIRR5pLZG2dmzqXw5R',
+        instanceUrl: '',
+        accessToken: '',
         version: '65.0'
       });
       return conn;
+      // fallback hack - end
     } catch (error1) {
       console.error('Error connecting to Salesforce:', error);
       throw error;
